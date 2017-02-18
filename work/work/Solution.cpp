@@ -71,3 +71,105 @@ vector<string> Solution::findWords(vector<string>& words) {
 	return result;
 
 }
+
+int Solution::islandPerimeter(vector<vector<int>>& grid) {
+
+	int result = 0;
+	int row_end = grid.size();
+	int col_end;
+	bool leftOnLand = false;
+	int col_size_max = 0;
+
+	for (int row = 0; row<row_end; row++) {
+		col_end = grid[row].size();
+		if (col_end>col_size_max)  col_size_max = col_end;
+		leftOnLand = false;
+
+		for (int col = 0; col<col_end; col++) {
+			if (grid[row][col] == 1) {
+				if (!leftOnLand) {
+					result++;
+					leftOnLand = true;
+				}
+			}
+			else {
+				if (leftOnLand) {
+					result++;
+					leftOnLand = false;
+				}
+			}
+
+		}
+		if (grid[row][col_end - 1])  result++;
+
+		for (int col = 0; col<(col_size_max - col_end); col++) {
+			grid[row].push_back(0);
+		}
+	}
+	cerr << result<<" "<<col_size_max << endl;
+	bool upOnLand = false;
+	for (int col = 0; col<col_size_max; col++) {
+		upOnLand = false;
+		for (int row = 0; row<row_end; row++) {
+			if (grid[row][col]) {
+				if (!upOnLand) {
+					result++;
+					upOnLand = true;
+				}
+			}
+			else {
+				if (upOnLand) {
+					result++;
+					upOnLand = false;
+				}
+			}
+		}
+		if (grid[row_end - 1][col]) result++;
+	}
+
+	return result;
+
+}
+
+int Solution::islandPerimeter2(vector<vector<int>>& grid) {
+	int row_end = grid.size();
+	int col_end = grid[0].size();
+	vector<int > template_row(col_end,0);
+	int result = 0;
+	bool leftOnLand = false;
+	int max_col_size = col_end;
+	//for (int i = 0; i < col_end; i++)
+	//	cout << template_row[i] << endl;
+	for (int row = 0; row < row_end; row++) {
+		leftOnLand = false;
+		col_end = grid[row].size();
+		if (col_end > max_col_size ) {
+			for (int i = 0; i < (col_end - max_col_size); i++)  template_row.push_back(0);
+		}
+
+		for (int col = 0; col < col_end; col++) {
+			if (grid[row][col]) {
+				if (!leftOnLand) {
+					result++;
+					leftOnLand = true;
+				}
+				if (!template_row[col])  result++;
+			}
+			else {
+				if (leftOnLand) {
+					result++;
+					leftOnLand = false;
+				}
+				if (template_row[col])  result++;
+			}
+			template_row[col] = grid[row][col];
+		}
+		if (grid[row][col_end - 1])  result++;
+	}
+
+	for (int col = 0; col < max_col_size; col++) {
+		if (grid[row_end - 1][col]) result++;
+	}
+	return result;
+	
+}

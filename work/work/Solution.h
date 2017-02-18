@@ -12,4 +12,6 @@ public:
 	Solution();
 	void sayHello();
 	vector<string> findWords(vector<string>& words);
+	int islandPerimeter(vector<vector<int>>& grid);
+	int islandPerimeter2(vector<vector<int>>& grid);
 };
