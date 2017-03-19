@@ -4,7 +4,10 @@
 #include <stddef.h>
 #include <iostream>
 #include <vector>
+#include <string>
+#include<algorithm>  
 
+using namespace std;
 class Solution{
 public:
 	Solution();
@@ -17,6 +20,7 @@ public:
 	};
  
 	int maxDepth(TreeNode* root);
+	char findTheDifference(string s, string t);
 };
 
 #endif

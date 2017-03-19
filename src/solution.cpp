@@ -1,5 +1,6 @@
 #include "solution.h"
 
+using namespace std;
 int Solution::maxDepth(Solution::TreeNode* root)
 {
     	std::vector<TreeNode*> curTrees;
@@ -24,4 +25,23 @@ int Solution::maxDepth(Solution::TreeNode* root)
     	return depth;
 
 }
+
+char Solution::findTheDifference(string s, string t)
+{
+	sort(s.begin(), s.end());
+	sort(t.begin(), t.end());
+	
+	for( int i = 0; i < t.size(); i++){
+		if( t[i] != s[i] ) return t[i];
+	}
+	
+	/**
+	 *         char r = 0;
+	 *  for(char c:s) r^=c;
+	 *  for(char c:t) r^=c;
+	 *   return r;
+	 */
+
+}
+
 
